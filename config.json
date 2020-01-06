@@ -1,0 +1,11 @@
+{
+  "port": 5000,
+  "ssl_no": {
+    "key": ".\\ssl\\proxy-service.key",
+    "certificate": ".\\ssl\\proxy-service.cert"
+  },
+  "logLevel": "debug",
+  "defaultRoute": "http://echo.websocket.org",
+  "authService": "http://localhost:5001/auth",
+  "authTokenHeader":  "test"
+}

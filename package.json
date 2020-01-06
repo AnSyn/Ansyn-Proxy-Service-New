@@ -1,0 +1,25 @@
+{
+  "name": "Proxy-Service",
+  "version": "0.0.0",
+  "description": "Proxy-Service",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.2",
+    "@types/node": "^8.0.14",
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.2",
+    "typescript": "^3.7.4",
+    "winston": "^3.2.1",
+    "winston-transport": "^4.3.0"
+  },
+  "dependencies": {
+    "http-proxy-middleware": "^0.20.0"
+  }
+}

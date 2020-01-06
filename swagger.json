@@ -1,0 +1,58 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Proxy-Service API",
+    "description": "Proxy-Service API"
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "tags": [],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/logs": {
+      "get": {
+        "tags": [
+          "Logs"
+        ],
+        "description": "Get the existing logs",
+        "parameters": [
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing logs.",
+            "schema": {
+              "$ref": "#/definitions/Log"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Log": {
+      "properties": {
+        "message": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "level": {
+          "type": "string",
+          "uniqueItems": true
+        }
+      }
+    }
+  }
+}
