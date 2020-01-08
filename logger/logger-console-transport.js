@@ -7,7 +7,7 @@
             all: true
         }),
         winston.format.label({
-            label: '[Proxy-Service]'
+            label: '[proxy-service]'
         }),
         winston.format.timestamp({
             format: "YY-MM-DD HH:mm:ss"

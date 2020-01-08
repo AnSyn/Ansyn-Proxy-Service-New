@@ -6,7 +6,6 @@
         }
 
         log(info, callback) {
-            // console.info(info);           
             callback();
         }
     }
