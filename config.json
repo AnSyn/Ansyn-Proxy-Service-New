@@ -7,5 +7,6 @@
   "logLevel": "debug",
   "defaultRoute": "http://echo.websocket.org",
   "authService": "http://localhost:5001/auth",
-  "authTokenHeader":  "test"
+  "authRequestTokenHeader":  "test",
+  "authTokenHeader": "test"
 }
