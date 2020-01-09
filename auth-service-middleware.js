@@ -2,19 +2,24 @@
     const axios = require('axios');
     const config = require('./config.json');
     const logger = require('./logger/logger.js');
+    const logFormat = require('./logger/log-formatter.js')
+    const requestLog = require('./log-request.js')
 
     module.exports = async (req, res, next) =>
     { 
         const url = req.originalUrl;
-        logger.info(`[proxy-service]: ${req.method} ${url} [requested by: ${req.ip}]`);
+        let log = new requestLog(req.method, url, req.ip, "checking the need for authentication.");        
+        logger.debug(logFormat(log));
         const authToken = req.headers[config.authTokenHeader];  
         if (authToken === undefined) {
-            logger.debug(`[proxy-service]: ${req.method} ${url} [no authentication required]`);
+            log = new requestLog(req.method, url, req.ip, "no authentication required.");
+            logger.debug(logFormat(log));
             next();
             return;
         }
 
-        logger.debug(`[proxy-service]: ${req.method} ${url} [authentication required]`);
+        log = new requestLog(req.method, url, req.ip, "authentication required.");
+        logger.debug(logFormat(log));
         let authUrl = config.authService; 
         if (false == authUrl.endsWith('/')) {
             authUrl += '/';
@@ -22,7 +27,8 @@
         const authReq = `${authUrl}?${config.authRequestTokenHeader}=${authToken}`;
         try {
             const response = await axios.get(authReq);
-            logger.debug(`[proxy-service]: ${req.method} ${url} [authentication token received]`);
+            log = new requestLog(req.method, url, req.ip, "authentication token received.");
+            logger.debug(logFormat(log));
             const token = response.headers[config.authTokenHeader];
             let modifiedUrl = req.url;
             if (false === modifiedUrl.endsWith('/')) {
@@ -31,8 +37,9 @@
             modifiedUrl += `?${config.authTokenHeader}=${token}`;
             req.originalUrl = modifiedUrl;
             next();
-        } catch (err) {            
-            logger.error(`[proxy-service]: ${req.method} ${url} [failed to get authentication token]`);
+        } catch (err) {    
+            log = new requestLog(req.method, url, req.ip, "failed to get authentication token.");
+            logger.error(logFormat(log));
             const errResponse = err.response;
             if (errResponse) {
                 res._headers = errResponse.headers;

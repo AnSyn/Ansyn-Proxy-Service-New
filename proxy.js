@@ -7,9 +7,11 @@
     const logger = require('./logger/logger.js');
     const proxyOptions = require('./proxy-options.js');
     const config = require('./config.json');
+    const urlNormailize = require('./url-normalize-middleware');
     const auth = require('./auth-service-middleware');
 
     const httpProxy = proxyMiddleware(proxyOptions);
+    app.use(urlNormailize); 
     app.use(auth);
     app.use(httpProxy);
 
@@ -22,7 +24,7 @@
             module.exports = httpsServer;
         }
         catch (err) {
-            logger.error(`Could not initialize HTTPS server.\r\nerror: ${err}`);
+            logger.error(`could not initialize HTTPS server.\r\nerror: ${err}`);
             module.exports = null;
         }
     } else {

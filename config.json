@@ -5,7 +5,7 @@
     "certificate": ".\\ssl\\proxy-service.cert"
   },
   "logLevel": "debug",
-  "defaultRoute": "http://echo.websocket.org",
+  "defaultRoute": "http://no.such.website.org.ding-dong.dot.com.ping.zip",
   "authService": "http://localhost:5001/auth",
   "authRequestTokenHeader":  "test",
   "authTokenHeader": "test"

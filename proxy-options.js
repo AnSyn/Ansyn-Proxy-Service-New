@@ -1,22 +1,18 @@
 {
     const logger = require('./logger/logger.js');
+    const logFormat = require('./logger/log-formatter.js')
+    const requestLog = require('./log-request.js')
     const config = require('./config.json');
-
-    function normalizeUrl(url, protocol) {
-        if (url.startsWith("/")) {
-            url = url.slice(1, url.length);
-        }
-        if (url.toLowerCase().startsWith("www")) {
-            url = `${protocol}://${url}`;
-        }
-        return url;
-    };
 
     const proxyOptions = {
             target: config.defaultRoute,
             router: function (req) {
-                return normalizeUrl(req.url, req.protocol);
-            },
+                let url = req.url;
+                if (url.startsWith("/")) {
+                    url = url.slice(1, url.length);
+                }
+                return url;
+        },
             ws: true,
             ignorePath: true,
             changeOrigin: true,
@@ -25,11 +21,13 @@
                 return logger;
             },
             onError: function onError(err, req, res) {
-                logger.error(`[proxy-service] ${req.method} ${req.url} [requested by: ${req.ip}] caused an error. could not proxy the request.`);
+                const url = req.originalUrl;
+                let log = new requestLog(req.method, url, req.ip, `could not proxy the request. error: ${err}`);        
+                logger.error(logFormat(log));
                 res.writeHead(500, {
                     'Content-Type': 'text/plain'
                 });
-                res.end('Something went wrong. Could not proxy the request.');
+                res.end('something went wrong. could not proxy the request.');
             }
         }
     module.exports = proxyOptions;
