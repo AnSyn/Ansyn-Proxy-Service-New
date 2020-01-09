@@ -1,3 +1,3 @@
 const config = require('./config.json');
 const proxy = require('./proxy.js');
-proxy.listen(config.port, () => console.info(`web proxy server listening on port: ${config.port}`));
+proxy.listen(config.port, () => console.info(`proxy-service listening on port: ${config.port}`));
