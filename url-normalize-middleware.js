@@ -35,7 +35,7 @@
         }
 
         const url = req.originalUrl;
-        let log = new requestLog(req.method, url, req.ip, `contains the 'referer' header: '${referer}.`);        
+        let log = new requestLog(req.method, url, req.ip, `contains the 'referer' header: '${referer}'.`);        
         logger.debug(logFormat(log));
 
         const protocol = req.protocol;
