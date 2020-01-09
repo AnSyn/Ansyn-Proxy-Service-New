@@ -42,7 +42,7 @@
         const host = req.headers["host"];
         referer = referer.slice(protocol.length + "://".length + host.length + 1);
         req.originalUrl = referer + req.originalUrl;
-        log = new requestLog(req.method, url, req.ip, `updated request (using the referer header) url to: '${req.originalUrl}'.`);        
+        log = new requestLog(req.method, url, req.ip, `updated request url (using the referer header) to: '${req.originalUrl}'.`);        
         logger.debug(logFormat(log));
 
         return req;
