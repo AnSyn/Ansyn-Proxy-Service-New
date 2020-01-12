@@ -20,6 +20,5 @@
   "dependencies": {
     "axios": "^0.19.1",
     "http-proxy-middleware": "^0.20.0",
-    "request": "^2.88.0"
   }
 }

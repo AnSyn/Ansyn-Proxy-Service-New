@@ -7,6 +7,6 @@
   "logLevel": "debug",
   "defaultRoute": "http://no.such.website.org.ding-dong.dot.com.ping.zip",
   "authService": "http://localhost:5001/auth",
-  "authRequestTokenHeader":  "test",
+  "authRequestTokenHeader":  "req-test",
   "authTokenHeader": "test"
 }
